@@ -1,24 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Main from "./pages/Main/Main";
+import { useEffect, useState } from "react";
+import io from "socket.io-client";
+import Footer from "./pages/Footer/Footer";
+import JoinRoomModal from "./pages/JoinRoomModal/JoinRoomModal";
+
+const socket = io.connect("http://localhost:5000");
 
 function App() {
+  const [showModal, setShowModal] = useState(false);
+  const [roomCode, setRoomCode] = useState(null);
+
+  useEffect(() => {
+    console.log("hello", roomCode);
+    if (roomCode) {
+      socket.emit("joinRoom", roomCode);
+    }
+  }, [roomCode]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <JoinRoomModal
+        showModal={showModal}
+        setShowModal={setShowModal}
+        setRoomCode={setRoomCode}
+      />
+      <Main socket={socket} />
+      <Footer setShowModal={setShowModal}></Footer>
+    </>
   );
 }
 

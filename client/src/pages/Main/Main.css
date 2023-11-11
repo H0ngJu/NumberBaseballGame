@@ -1,0 +1,17 @@
+main {
+  width: 100%;
+  height: 100vh;
+  text-align: center;
+  background-color: black;
+  color: white;
+}
+
+.title {
+  padding-top: 40vh;
+  font-size: xx-large;
+}
+
+.subTitle {
+  padding-top: 3vh;
+  font-size: large;
+}
