@@ -1,5 +1,5 @@
-import "./Footer.css";
 import LinkSvg from "./Link";
+import "./Footer.css";
 
 const Footer = ({ setShowModal }) => {
   return (

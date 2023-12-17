@@ -22,11 +22,21 @@ const modal = {
   },
 };
 
-const JoinRoomModal = ({ showModal, setShowModal, setRoomCode }) => {
+const JoinRoomModal = ({
+  showModal,
+  setShowModal,
+  setRoomCode,
+  setPlayerNumbers,
+}) => {
   const [roomCodeInput, setRoomCodeInput] = useState(null);
+  const [numbersInput, setNumbersInput] = useState("");
   const handleSave = () => {
     setShowModal(false);
     setRoomCode(roomCodeInput);
+    const numbersArray = numbersInput
+      .split("")
+      .map((digit) => parseInt(digit, 10));
+    setPlayerNumbers(numbersArray);
   };
 
   return (
@@ -44,8 +54,16 @@ const JoinRoomModal = ({ showModal, setShowModal, setRoomCode }) => {
             <input
               className="joinRoomModal-card-input"
               type="number"
-              placeholder="eg: 1212"
+              placeholder="Roomcode"
+              value={roomCodeInput}
               onChange={(e) => setRoomCodeInput(e.target.value)}
+            />
+            <input
+              className="joinRoomModal-card-input"
+              type="text"
+              placeholder="Your Numbers (e.g., 1234)"
+              value={numbersInput}
+              onChange={(e) => setNumbersInput(e.target.value)}
             />
             <button onClick={handleSave} className="joinRoomModal-card-button">
               Save
